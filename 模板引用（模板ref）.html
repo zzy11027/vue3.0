@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>模板引用（模板ref）</title>
+    <!--
+      <script src="js/vue.global.js"></script>
+      <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+      <script src="https://unpkg.com/vue-router"></script>
+      <script src="https://unpkg.com/vue@next"></script>
+      <script src="https://unpkg.com/vue-router@next"></script>
+      <script src="https://unpkg.com/vuex@next"></script>
+    -->
+    <script src="./nf-vue-cnd/vue.golbal.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" ref="input">
+    </div>
+  <script>
+    // vue3的对象
+    const { ref, onMounted, watchEffect } = Vue;
+    const vue3Composition = {
+      setup() { // 传说中的setup
+        const input = ref(null);
+        // onMounted(() => {
+        //   console.log('input :>> ', input);
+        // })
+        watchEffect(() => {
+          console.log(input.value)
+        },{
+          flush: 'post' 
+        })
+        return {  // 返回给模板，否则模板访问不到。
+          input
+        }
+      }
+    }
+    // 创建vue3的实例
+    const vm = Vue.createApp(vue3Composition).mount('#app') // 挂载Vue的app实例
+  </script>
+</body>
+</html>
+
